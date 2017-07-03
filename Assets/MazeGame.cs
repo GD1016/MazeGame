@@ -16,20 +16,20 @@ public class MazeGame : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         if (Input.GetKeyDown(KeyCode.RightArrow)) {
-            Player.moveRight();
-            Board.setLifeStatus(Player.CharacterCol, Player.CharacterRow, false);
+            Player.move(1);
+            //Board.setLifeStatus(Player.CharacterCol, Player.CharacterRow, false);
         }
         if (Input.GetKeyDown(KeyCode.LeftArrow)) {
-            Player.moveLeft();
-            Board.setLifeStatus(Player.CharacterCol, Player.CharacterRow, false);
+            Player.move(0);
+            //Board.setLifeStatus(Player.CharacterCol, Player.CharacterRow, false);
         }
         if (Input.GetKeyDown(KeyCode.UpArrow)) {
-            Player.moveUp();
-            Board.setLifeStatus(Player.CharacterCol, Player.CharacterRow, false);
+            Player.move(2);
+            //Board.setLifeStatus(Player.CharacterCol, Player.CharacterRow, false);
         }
         if (Input.GetKeyDown(KeyCode.DownArrow)) {
-            Player.moveDown();
-            Board.setLifeStatus(Player.CharacterCol, Player.CharacterRow, false);
+            Player.move(3);
+            //Board.setLifeStatus(Player.CharacterCol, Player.CharacterRow, false);
         }
 	}
 }
