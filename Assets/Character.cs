@@ -21,23 +21,28 @@ public class Character : MonoBehaviour {
 
     }
 
-    public void moveLeft() {
-        CharacterRow--;
-        transform.position = Board.getFieldCenter(CharacterCol, CharacterRow);
-    }
-
-    public void moveRight() {
-        CharacterRow++;
-        transform.position = Board.getFieldCenter(CharacterCol, CharacterRow);
-    }
-
-    public void moveUp() {
-        CharacterCol++;
-        transform.position = Board.getFieldCenter(CharacterCol, CharacterRow);
-    }
-
-    public void moveDown() {
-        CharacterCol--;
-        transform.position = Board.getFieldCenter(CharacterCol, CharacterRow);
+    public void move(int direction) {
+        switch (direction) {
+            //Left
+            case 0:
+                CharacterCol--;
+                transform.position = Board.getFieldCenter(CharacterCol, CharacterRow);
+                break;
+            //Right
+            case 1:
+                CharacterCol++;
+                transform.position = Board.getFieldCenter(CharacterCol, CharacterRow);
+                break;
+            //Up
+            case 2:
+                CharacterRow++;
+                transform.position = Board.getFieldCenter(CharacterCol, CharacterRow);
+                break;
+            //Down
+            case 3:
+                CharacterRow--;
+                transform.position = Board.getFieldCenter(CharacterCol, CharacterRow);
+                break;
+        }
     }
 }
