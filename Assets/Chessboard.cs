@@ -8,7 +8,9 @@ public class Chessboard : MonoBehaviour {
     public int field_y_variable = 20;
     public bool pause = false;
 
-    GameObject[,] grid;
+    public GameObject[,] grid;
+
+    public Character Player;
 
     // Use this for initialization
     void Start() {
@@ -23,7 +25,7 @@ public class Chessboard : MonoBehaviour {
                 grid[col, row] = tile;
 
                 int random = Random.Range(0, 10);
-                if (random >= 5) {
+                if (random >= 2) {
                     tile.GetComponent<Renderer>().material.color = Color.blue;
                 }
             }
@@ -58,7 +60,8 @@ public class Chessboard : MonoBehaviour {
     }
 
     public bool isAlive(int col, int row) {
-        if (col > field_x_variable || row > field_y_variable || col < 0 || row < 0) {
+        print(col + " " + row);
+        if (col >= field_x_variable || row >= field_y_variable || col < 0 || row < 0) {
             return false;
         }
         return grid[col, row].GetComponent<Renderer>().material.color == Color.blue;
