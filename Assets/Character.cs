@@ -9,15 +9,12 @@ public class Character : MonoBehaviour {
     public int CharacterCol;
     public int CharacterRow;
 
-    public enum Direction { left, right, up, down }
 
-    // Use this for initialization
     void Start() {
         transform.position = Board.getFieldCenter(CharacterCol, CharacterRow);
 
         //transform.position.Set(CharacterCol, CharacterRow, 0);
     }
-    // Update is called once per frame
     void Update() {
 
     }

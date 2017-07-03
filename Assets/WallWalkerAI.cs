@@ -6,7 +6,7 @@ public class WallWalkerAI : MonoBehaviour {
 
     public Character character;
     float turnTime = 0.5f;
-    Character.Direction currentDir = Character.Direction.left;
+    Direction currentDir = Direction.left;
     public enum CurrentDir { up, down, left, right }
 
 
@@ -31,22 +31,22 @@ public class WallWalkerAI : MonoBehaviour {
 
     void move() {
         switch (currentDir) {
-            case Character.Direction.left:
+            case Direction.left:
                 if (character.Board.isAlive(character.CharacterCol - 1, character.CharacterRow)) {
                     character.move(currentDir);
                 } else { turnLeft(); }
                 break;
-            case Character.Direction.down:
+            case Direction.down:
                 if (character.Board.isAlive(character.CharacterCol, character.CharacterRow - 1)) {
                     character.move(currentDir);
                 } else { turnLeft(); }
                 break;
-            case Character.Direction.right:
+            case Direction.right:
                 if (character.Board.isAlive(character.CharacterCol + 1, character.CharacterRow)) {
                     character.move(currentDir);
                 } else { turnLeft(); }
                 break;
-            case Character.Direction.up:
+            case Direction.up:
                 if (character.Board.isAlive(character.CharacterCol, character.CharacterRow + 1)) {
                     character.move(currentDir);
                 } else { turnLeft(); }
@@ -56,17 +56,17 @@ public class WallWalkerAI : MonoBehaviour {
 
     void turnLeft() {
         switch (currentDir) {
-            case Character.Direction.left:
-                currentDir = Character.Direction.down;
+            case Direction.left:
+                currentDir = Direction.down;
                 break;
-            case Character.Direction.down:
-                currentDir = Character.Direction.right;
+            case Direction.down:
+                currentDir = Direction.right;
                 break;
-            case Character.Direction.right:
-                currentDir = Character.Direction.up;
+            case Direction.right:
+                currentDir = Direction.up;
                 break;
-            case Character.Direction.up:
-                currentDir = Character.Direction.left;
+            case Direction.up:
+                currentDir = Direction.left;
                 break;
         }
 

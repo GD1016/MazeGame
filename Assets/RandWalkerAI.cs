@@ -31,19 +31,19 @@ public class RandWalkerAI : MonoBehaviour {
     void move() {
         int random = Random.Range(0, 4);
         if (random == 0) {
-            Character.move(Character.Direction.left);
+            Character.move(Direction.left);
             return;
         }
         if (random == 1) {
-            Character.move(Character.Direction.right);
+            Character.move(Direction.right);
             return;
         }
         if (random == 2) {
-            Character.move(Character.Direction.up);
+            Character.move(Direction.up);
             return;
         }
         if (random == 3) {
-            Character.move(Character.Direction.down);
+            Character.move(Direction.down);
             return;
         }
     }
