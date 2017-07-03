@@ -5,7 +5,6 @@ using UnityEngine;
 public class MazeGame : MonoBehaviour {
 
     public Chessboard Board;
-
     public Character Player;
 
     void Start() {

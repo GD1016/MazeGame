@@ -5,6 +5,8 @@ using UnityEngine;
 public class WallWalkerAI : MonoBehaviour {
 
     public Character character;
+    public IndexPaar pos;
+
     float turnTime = 0.5f;
     Direction currentDir = Direction.left;
     public enum CurrentDir { up, down, left, right }
@@ -32,22 +34,22 @@ public class WallWalkerAI : MonoBehaviour {
     void move() {
         switch (currentDir) {
             case Direction.left:
-                if (character.Board.isAlive(character.CharacterCol - 1, character.CharacterRow)) {
+                if (character.Board.isAlive(pos.col - 1, pos.row)) {
                     character.move(currentDir);
                 } else { turnLeft(); }
                 break;
             case Direction.down:
-                if (character.Board.isAlive(character.CharacterCol, character.CharacterRow - 1)) {
+                if (character.Board.isAlive(pos.col, pos.row - 1)) {
                     character.move(currentDir);
                 } else { turnLeft(); }
                 break;
             case Direction.right:
-                if (character.Board.isAlive(character.CharacterCol + 1, character.CharacterRow)) {
+                if (character.Board.isAlive(pos.col + 1, pos.row)) {
                     character.move(currentDir);
                 } else { turnLeft(); }
                 break;
             case Direction.up:
-                if (character.Board.isAlive(character.CharacterCol, character.CharacterRow + 1)) {
+                if (character.Board.isAlive(pos.col, pos.row + 1)) {
                     character.move(currentDir);
                 } else { turnLeft(); }
                 break;

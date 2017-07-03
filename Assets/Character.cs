@@ -5,13 +5,12 @@ using UnityEngine;
 public class Character : MonoBehaviour {
 
     public Chessboard Board;
+    public IndexPaar pos;
 
-    public int CharacterCol;
-    public int CharacterRow;
 
 
     void Start() {
-        transform.position = Board.getFieldCenter(CharacterCol, CharacterRow);
+        transform.position = Board.getFieldCenter(pos.col, pos.row);
 
         //transform.position.Set(CharacterCol, CharacterRow, 0);
     }
@@ -23,27 +22,27 @@ public class Character : MonoBehaviour {
     public void move(Direction direction) {
         switch (direction) {
             case Direction.left:
-                if (Board.isAlive(CharacterCol - 1, CharacterRow)) {
-                    CharacterCol--;
-                    transform.position = Board.getFieldCenter(CharacterCol, CharacterRow);
+                if (Board.isAlive(pos.col - 1, pos.row)) {
+                    pos.col--;
+                    transform.position = Board.getFieldCenter(pos.col, pos.row);
                 }
                 break;
             case Direction.right:
-                if (Board.isAlive(CharacterCol + 1, CharacterRow)) {
-                    CharacterCol++;
-                    transform.position = Board.getFieldCenter(CharacterCol, CharacterRow);
+                if (Board.isAlive(pos.col + 1, pos.row)) {
+                    pos.col++;
+                    transform.position = Board.getFieldCenter(pos.col, pos.row);
                 }
                 break;
             case Direction.up:
-                if (Board.isAlive(CharacterCol, CharacterRow + 1)) {
-                    CharacterRow++;
-                    transform.position = Board.getFieldCenter(CharacterCol, CharacterRow);
+                if (Board.isAlive(pos.col, pos.row + 1)) {
+                    pos.row++;
+                    transform.position = Board.getFieldCenter(pos.col, pos.row);
                 }
                 break;
             case Direction.down:
-                if (Board.isAlive(CharacterCol, CharacterRow - 1)) {
-                    CharacterRow--;
-                    transform.position = Board.getFieldCenter(CharacterCol, CharacterRow);
+                if (Board.isAlive(pos.col, pos.row - 1)) {
+                    pos.row--;
+                    transform.position = Board.getFieldCenter(pos.col, pos.row);
                 }
                 break;
             default:
