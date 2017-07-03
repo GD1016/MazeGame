@@ -34,30 +34,22 @@ public class WallWalkerAI : MonoBehaviour {
             case Character.Direction.left:
                 if (character.Board.isAlive(character.CharacterCol - 1, character.CharacterRow)) {
                     character.move(currentDir);
-                } else {
-                    turnLeft();
-                }
+                } else { turnLeft(); }
                 break;
             case Character.Direction.down:
                 if (character.Board.isAlive(character.CharacterCol, character.CharacterRow - 1)) {
                     character.move(currentDir);
-                } else {
-                    turnLeft();
-                }
+                } else { turnLeft(); }
                 break;
             case Character.Direction.right:
                 if (character.Board.isAlive(character.CharacterCol + 1, character.CharacterRow)) {
                     character.move(currentDir);
-                } else {
-                    turnLeft();
-                }
+                } else { turnLeft(); }
                 break;
             case Character.Direction.up:
                 if (character.Board.isAlive(character.CharacterCol, character.CharacterRow + 1)) {
                     character.move(currentDir);
-                } else {
-                    turnLeft();
-                }
+                } else { turnLeft(); }
                 break;
         }
     }
