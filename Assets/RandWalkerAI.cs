@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class RandWalkerAI : MonoBehaviour {
-
     public Character Character;
+    int framecounter;
+    public float _turnTime = 0.5f;
+    float turnTime = _
 
     // Use this for initialization
     void Start() {
@@ -13,8 +15,23 @@ public class RandWalkerAI : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
-        int random = Random.Range(0, 4);
 
+        turnTime -= Time.deltaTime;
+
+        if (turnTime < 0) {
+            turnTime = 0.5f;
+            move();
+        }
+
+        //Alternative
+        //int randomMovementIndex = Random.Range(0, 4);
+        //Character.Direction randomDirection = (Character.Direction)randomMovementIndex;
+
+
+    }
+
+    void move() {
+        int random = Random.Range(0, 4);
         if (random == 0) {
             Character.move(Character.Direction.left);
             return;
@@ -32,4 +49,6 @@ public class RandWalkerAI : MonoBehaviour {
             return;
         }
     }
+
 }
+
