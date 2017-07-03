@@ -9,6 +9,8 @@ public class Character : MonoBehaviour {
     public int CharacterCol;
     public int CharacterRow;
 
+    public enum Direction { left, right, up, down }
+
     // Use this for initialization
     void Start() {
         transform.position = Board.getFieldCenter(CharacterCol, CharacterRow);
@@ -21,27 +23,30 @@ public class Character : MonoBehaviour {
 
     }
 
-    public void move(int direction) {
+
+    public void move(Direction direction) {
         switch (direction) {
             //Left
-            case 0:
+            case Direction.left:
                 CharacterCol--;
                 transform.position = Board.getFieldCenter(CharacterCol, CharacterRow);
                 break;
             //Right
-            case 1:
+            case Direction.right:
                 CharacterCol++;
                 transform.position = Board.getFieldCenter(CharacterCol, CharacterRow);
                 break;
             //Up
-            case 2:
+            case Direction.up:
                 CharacterRow++;
                 transform.position = Board.getFieldCenter(CharacterCol, CharacterRow);
                 break;
             //Down
-            case 3:
+            case Direction.down:
                 CharacterRow--;
                 transform.position = Board.getFieldCenter(CharacterCol, CharacterRow);
+                break;
+            default:
                 break;
         }
     }
