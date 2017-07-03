@@ -60,7 +60,6 @@ public class Chessboard : MonoBehaviour {
     }
 
     public bool isAlive(int col, int row) {
-        print(col + " " + row);
         if (col >= field_x_variable || row >= field_y_variable || col < 0 || row < 0) {
             return false;
         }
