@@ -8,30 +8,30 @@ public class MazeGame : MonoBehaviour {
 
     public Character Player;
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start() {
 
-	}
-	
-    
+    }
 
-	// Update is called once per frame
-	void Update () {
+
+
+    // Update is called once per frame
+    void Update() {
         if (Input.GetKeyDown(KeyCode.LeftArrow)) {
             Player.move(Character.Direction.left);
-            //Board.setLifeStatus(Player.CharacterCol, Player.CharacterRow, false);
+            return;
         }
         if (Input.GetKeyDown(KeyCode.RightArrow)) {
             Player.move(Character.Direction.right);
-            //Board.setLifeStatus(Player.CharacterCol, Player.CharacterRow, false);
+            return;
         }
         if (Input.GetKeyDown(KeyCode.UpArrow)) {
             Player.move(Character.Direction.up);
-            //Board.setLifeStatus(Player.CharacterCol, Player.CharacterRow, false);
+            return;
         }
         if (Input.GetKeyDown(KeyCode.DownArrow)) {
             Player.move(Character.Direction.down);
-            //Board.setLifeStatus(Player.CharacterCol, Player.CharacterRow, false);
+            return;
         }
-	}
+    }
 }

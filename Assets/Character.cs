@@ -17,7 +17,6 @@ public class Character : MonoBehaviour {
 
         //transform.position.Set(CharacterCol, CharacterRow, 0);
     }
-
     // Update is called once per frame
     void Update() {
 
@@ -26,25 +25,29 @@ public class Character : MonoBehaviour {
 
     public void move(Direction direction) {
         switch (direction) {
-            //Left
             case Direction.left:
-                CharacterCol--;
-                transform.position = Board.getFieldCenter(CharacterCol, CharacterRow);
+                if (Board.isAlive(CharacterCol - 1, CharacterRow)) {
+                    CharacterCol--;
+                    transform.position = Board.getFieldCenter(CharacterCol, CharacterRow);
+                }
                 break;
-            //Right
             case Direction.right:
-                CharacterCol++;
-                transform.position = Board.getFieldCenter(CharacterCol, CharacterRow);
+                if (Board.isAlive(CharacterCol + 1, CharacterRow)) {
+                    CharacterCol++;
+                    transform.position = Board.getFieldCenter(CharacterCol, CharacterRow);
+                }
                 break;
-            //Up
             case Direction.up:
-                CharacterRow++;
-                transform.position = Board.getFieldCenter(CharacterCol, CharacterRow);
+                if (Board.isAlive(CharacterCol, CharacterRow + 1)) {
+                    CharacterRow++;
+                    transform.position = Board.getFieldCenter(CharacterCol, CharacterRow);
+                }
                 break;
-            //Down
             case Direction.down:
-                CharacterRow--;
-                transform.position = Board.getFieldCenter(CharacterCol, CharacterRow);
+                if (Board.isAlive(CharacterCol, CharacterRow - 1)) {
+                    CharacterRow--;
+                    transform.position = Board.getFieldCenter(CharacterCol, CharacterRow);
+                }
                 break;
             default:
                 break;
