@@ -4,9 +4,7 @@ using UnityEngine;
 
 public class RandWalkerAI : MonoBehaviour {
     public Character Character;
-    int framecounter;
-    public float _turnTime = 0.5f;
-    float turnTime = _
+    float turnTime = 0.5f;
 
     // Use this for initialization
     void Start() {
