@@ -23,7 +23,7 @@ public class WallWalkerAI : MonoBehaviour {
         turnTime -= Time.deltaTime;
 
         if (turnTime < 0) {
-            turnTime = 0.5f;
+            turnTime = 0.1f;
             move();
         }
         //Alternative
