@@ -9,7 +9,6 @@ public class WallWalkerAI : MonoBehaviour {
 
     float turnTime = 0.5f;
     Direction currentDir = Direction.left;
-    public enum CurrentDir { up, down, left, right }
 
 
     // Use this for initialization
@@ -32,28 +31,13 @@ public class WallWalkerAI : MonoBehaviour {
     }
 
     void move() {
-        switch (currentDir) {
-            case Direction.left:
-                if (character.Board.isAlive(pos.col - 1, pos.row)) {
-                    character.move(currentDir);
-                } else { turnLeft(); }
-                break;
-            case Direction.down:
-                if (character.Board.isAlive(pos.col, pos.row - 1)) {
-                    character.move(currentDir);
-                } else { turnLeft(); }
-                break;
-            case Direction.right:
-                if (character.Board.isAlive(pos.col + 1, pos.row)) {
-                    character.move(currentDir);
-                } else { turnLeft(); }
-                break;
-            case Direction.up:
-                if (character.Board.isAlive(pos.col, pos.row + 1)) {
-                    character.move(currentDir);
-                } else { turnLeft(); }
-                break;
+        IndexPaar neighbour = pos.GetNeighbour(currentDir);
+        if (character.Board.isAlive(neighbour.col, neighbour.row)) {
+            character.move(currentDir);
+        }else {
+            turnLeft();
         }
+        
     }
 
     void turnLeft() {

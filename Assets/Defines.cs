@@ -8,7 +8,7 @@ public struct IndexPaar {
     public int col;
     public int row;
 
-    public IndexPaar GetNeightbour(Direction dir) {
+    public IndexPaar GetNeighbour(Direction dir) {
         IndexPaar neightbour = this;
 
         switch (dir) {
