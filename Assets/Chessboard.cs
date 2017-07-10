@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
+using System.Collections.Generic;
 
 public class Chessboard : MonoBehaviour {
 
@@ -15,7 +17,7 @@ public class Chessboard : MonoBehaviour {
                 grid[i, j].transform.position = new Vector3(i + 0.5f, j + 0.5f, 0);
                 grid[i, j].transform.parent = this.transform;
                 grid[i, j].name = string.Format("Kachel({0},{1})", i, j);
-                if (Random.Range(0.0f, 1.0f) <= 0.8f) {
+                if (UnityEngine.Random.Range(0.0f, 1.0f) <= 0.8f) {
                     SetAlive(i, j, true);
                 }
             }
@@ -37,6 +39,17 @@ public class Chessboard : MonoBehaviour {
 
     void Toggle(int col, int row) {
         SetAlive(col, row, !IsAlive(col, row));
+    }
+
+    internal List<IndexPaar> GetWalkableNeighbours(IndexPaar u) {
+        List<IndexPaar> neighbours = new List<IndexPaar>();
+        foreach(Direction dir in System.Enum.GetValues(typeof(Direction))){
+            IndexPaar neighbour = u.GetNeighbour(dir);
+            if (IsAlive(neighbour.col, neighbour.row)) {
+                neighbours.Add(neighbour);
+            }
+        }
+        return neighbours;
     }
 
     public void KillAll() {
