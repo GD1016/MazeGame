@@ -6,6 +6,7 @@ using UnityEngine;
 public class HuntWalkerAI : MonoBehaviour {
 
     public Character character;
+    public Character player;
     float timer = 0.5f; // timer variable, used as a "countdown" to next move
     int[,] distance;
 
@@ -25,7 +26,13 @@ public class HuntWalkerAI : MonoBehaviour {
     }
 
     private void Move() {
-
+        IndexPaar target = player.pos;
+        List<IndexPaar> path = GetPath(target);
+        if (path.Count > 0) {
+            IndexPaar firststep = path[0];
+            Direction dir = character.pos.GetNeighbourDirection(firststep);
+            character.Move(dir);
+        }
     }
 
     void Breitensuche(IndexPaar source) {
