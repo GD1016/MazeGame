@@ -68,7 +68,10 @@ public class Chessboard : MonoBehaviour {
         if (col < 0 || row < 0 || col >= size || row >= size) {
             return false;
         }
-        return grid[col, row].GetComponent<Renderer>().material.color == Color.blue;
+        if (grid[col, row].GetComponent<Renderer>().material.color == Color.blue || grid[col, row].GetComponent<Renderer>().material.color == Color.red) {
+            return true;
+        }
+        return false;
     }
 
     public void SetAlive(int col, int row, bool alive) {
