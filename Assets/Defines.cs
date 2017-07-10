@@ -1,31 +1,29 @@
-﻿public enum Direction { left, right, up, down }
-
-public enum RandomWord { Kekse, Kuchen, Bananenshake, Erdbärkäse, Ameisenkatapult, Bienenbär, Schokonudeln, Burger,
-    Schokoladenboot, Erdbeerbananen, Bananenelefanten, Elefantenurologe, Urologenquartett, Quartetttisch,
-    Tischapfel, Apfelkürbis }
+﻿public enum Direction {left, right, up, down};
 
 public struct IndexPaar {
     public int col;
     public int row;
 
-    public IndexPaar GetNeighbour(Direction dir) {
-        IndexPaar neightbour = this;
+    public IndexPaar GetNeighbour(Direction dir)
+    {
+        IndexPaar neighbour = this;
 
-        switch (dir) {
+        switch (dir)
+        {
             case Direction.left:
-                neightbour.col--;
+                neighbour.col--;
                 break;
             case Direction.right:
-                neightbour.col++;
+                neighbour.col++;
                 break;
             case Direction.up:
-                neightbour.col++;
+                neighbour.row++;
                 break;
             case Direction.down:
-                neightbour.col--;
+                neighbour.row--;
                 break;
         }
 
-        return neightbour;
+        return neighbour;
     }
 }

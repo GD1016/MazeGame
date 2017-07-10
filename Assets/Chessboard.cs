@@ -1,108 +1,85 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using System.Collections;
 
 public class Chessboard : MonoBehaviour {
 
-    public int field_x_variable = 20;
-    public int field_y_variable = 20;
+    public int size = 10;
+    public GameObject[,] grid;
     public bool pause = false;
 
-    public GameObject[,] grid;
-
-    public Character Player;
-
-    // Use this for initialization
     void Start() {
-        grid = new GameObject[field_x_variable, field_y_variable];
-
-        for (int col = 0; col < field_x_variable; col++) {
-            for (int row = 0; row < field_y_variable; row++) {
-                GameObject tile = GameObject.CreatePrimitive(PrimitiveType.Quad);
-                tile.transform.position = new Vector2(col + 0.5f, row + 0.5f);
-                tile.transform.parent = this.transform;
-                tile.name = string.Format("Kachel ({0},{1})", col, row);
-                grid[col, row] = tile;
-
-                int random = Random.Range(0, 10);
-                if (random >= 2) {
-                    tile.GetComponent<Renderer>().material.color = Color.blue;
+        grid = new GameObject[size, size];
+        for (int i = 0; i < size; i++) {
+            for (int j = 0; j < size; j++) {
+                grid[i, j] = GameObject.CreatePrimitive(PrimitiveType.Quad);
+                grid[i, j].transform.position = new Vector3(i + 0.5f, j + 0.5f, 0);
+                grid[i, j].transform.parent = this.transform;
+                grid[i, j].name = string.Format("Kachel({0},{1})", i, j);
+                if (Random.Range(0.0f, 1.0f) <= 0.8f) {
+                    SetAlive(i, j, true);
                 }
             }
         }
-
-        int camsize = field_x_variable / 2;
-        Camera.main.transform.position = new Vector3(camsize, camsize, -10);
-        Camera.main.orthographicSize = camsize;
+        Camera.main.transform.position = new Vector3(size / 2, size / 2, -10);
+        Camera.main.orthographicSize = size / 2;
     }
 
-    // Update is called once per frame
     void Update() {
+
     }
 
-    public int GetAliveNeighbours(int col, int row) {
+    public void ToggleMouseField() {
+        Vector3 mouseWorldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        int indexX = (int)mouseWorldPos.x;
+        int indexY = (int)mouseWorldPos.y;
+        Toggle(indexX, indexY);
+    }
 
-        int aliveNeighbours = 0;
-        int searchradius = 1;
+    void Toggle(int col, int row) {
+        SetAlive(col, row, !IsAlive(col, row));
+    }
 
-        for (int i = col - searchradius; i <= col + searchradius; i++) {
-            for (int j = row - searchradius; j <= row + searchradius; j++) {
-                if (i >= 0 && j >= 0 && i < field_x_variable && j < field_y_variable) {
-                    if (!(i == col && j == row)) {
-                        if (isAlive(i, j)) {
-                            aliveNeighbours++;
-                        }
-                    }
+    public void KillAll() {
+        for (int col = 0; col < size; col++) {
+            for (int row = 0; row < size; row++) {
+                SetAlive(col, row, false);
+            }
+        }
+    }
+
+    public int GetNumAliveNeighbours(int col, int row) {
+        int numAliveNeighbours = 0;
+        for (int neighCol = col - 1; neighCol <= col + 1; neighCol++) {
+            for (int neighRow = row - 1; neighRow <= row + 1; neighRow++) {
+                if (neighCol == col && neighRow == row) { // don’t check yourself
+                    continue; // skips one loop execution
+                }
+                if (neighCol >= 0 && neighCol < size &&
+                     neighRow >= 0 && neighRow < size &&
+                     IsAlive(neighCol, neighRow)) {
+                    numAliveNeighbours++;
                 }
             }
         }
-        return aliveNeighbours;
+        return numAliveNeighbours;
     }
 
-    public bool isAlive(int col, int row) {
-        if (col >= field_x_variable || row >= field_y_variable || col < 0 || row < 0) {
+    public bool IsAlive(int col, int row) {
+        if (col < 0 || row < 0 || col >= size || row >= size) {
             return false;
         }
         return grid[col, row].GetComponent<Renderer>().material.color == Color.blue;
     }
 
-    public void setLifeStatus(int col, int row, bool alive) {
-        if (col > field_x_variable || row > field_y_variable || col < 0 || row < 0) {
-            return;
-        }
-        if (!alive) {
-            grid[col, row].GetComponent<Renderer>().material.color = Color.white;
-        } else {
+    public void SetAlive(int col, int row, bool alive) {
+        if (alive) {
             grid[col, row].GetComponent<Renderer>().material.color = Color.blue;
-        }
-    }
-
-    public void killAll() {
-        print("Hallo");
-        for (int col = 0; col < field_x_variable; col++) {
-            for (int row = 0; row < field_y_variable; row++) {
-                setLifeStatus(col, row, false);
-            }
-        }
-    }
-
-    void toggle(int col, int row) {
-        if (isAlive(col, row)) {
-            setLifeStatus(col, row, false);
         } else {
-            setLifeStatus(col, row, true);
+            grid[col, row].GetComponent<Renderer>().material.color = Color.white;
         }
     }
 
-    public void toggleMouseField() {
-        Vector3 mouseWorldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        int indexX = (int)mouseWorldPos.x;
-        int indexY = (int)mouseWorldPos.y;
-        toggle(indexX, indexY);
-    }
-    public Vector3 getFieldCenter(int col, int row) {
-
-        Vector3 result = new Vector3(col + 0.5f, row + 0.5f, 0);
-        return result;
+    public Vector3 GetFieldCenter(int col, int row) {
+        return new Vector3(col + 0.5f, row + 0.5f, 0.0f);
     }
 }

@@ -5,11 +5,8 @@ using UnityEngine;
 public class WallWalkerAI : MonoBehaviour {
 
     public Character character;
-    public IndexPaar pos;
-
-    float turnTime = 0.5f;
+    float timer = 0.5f; // timer variable, used as a "countdown" to next move
     Direction currentDir = Direction.left;
-
 
     // Use this for initialization
     void Start() {
@@ -18,35 +15,28 @@ public class WallWalkerAI : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
-
-        turnTime -= Time.deltaTime;
-
-        if (turnTime < 0) {
-            turnTime = 0.1f;
-            move();
+        timer -= Time.deltaTime; // subtract time since last frame
+        if (timer > 0f) { // if countdown not done, skip
+            return;
         }
-        //Alternative
-        //int randomMovementIndex = Random.Range(0, 4);
-        //Character.Direction randomDirection = (Character.Direction)randomMovementIndex;
+        timer = 0.5f; // if we get here, reset timer
+        Move(); // and move
     }
 
-    void move() {
-        IndexPaar neighbour = pos.GetNeighbour(currentDir);
-        if (character.Board.isAlive(neighbour.col, neighbour.row)) {
-            character.move(currentDir);
-        }else {
-            turnLeft();
+    void Move() {
+        IndexPaar checkPos = character.pos.GetNeighbour(currentDir);
+
+        if (character.board.IsAlive(checkPos.col, checkPos.row)) {
+            character.Move(currentDir);
+        } else {
+            TurnLeft();
         }
-        
     }
 
-    void turnLeft() {
+    private void TurnLeft() {
         switch (currentDir) {
             case Direction.left:
                 currentDir = Direction.down;
-                break;
-            case Direction.down:
-                currentDir = Direction.right;
                 break;
             case Direction.right:
                 currentDir = Direction.up;
@@ -54,8 +44,9 @@ public class WallWalkerAI : MonoBehaviour {
             case Direction.up:
                 currentDir = Direction.left;
                 break;
+            case Direction.down:
+                currentDir = Direction.right;
+                break;
         }
-
-
     }
 }
