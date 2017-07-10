@@ -33,7 +33,7 @@ public class MazeGame : MonoBehaviour {
             IndexPaar source = new IndexPaar();
             source.col = indexX;
             source.row = indexY;
-            MarkMoveArea(source, 3);
+            //MarkMoveArea(source, 3);
         }
     }
     void MarkMoveArea(IndexPaar source, int range) {
