@@ -9,6 +9,7 @@ public class MazeGame : MonoBehaviour {
 
     // Use this for initialization
     void Start() {
+        int x = 1;
         int copyOfX = x;
         copyOfX = 2;
         print("Wert von copy: " + copyOfX);
@@ -23,6 +24,7 @@ public class MazeGame : MonoBehaviour {
         indexpaar.col = 3;
         IndexPaar copy = indexpaar;
         copy.col = 5;
+        print("Wert von indexpaar Colum: " + indexpaar.col);
         print("Wert von copy  Colum: " + copy.col);
 
     }
