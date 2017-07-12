@@ -5,7 +5,6 @@ using UnityEngine;
 public class WallWalkerAI : MonoBehaviour {
 
     public Character character;
-    float timer = 0.5f; // timer variable, used as a "countdown" to next move
     Direction currentDir = Direction.left;
 
     // Use this for initialization
@@ -15,15 +14,13 @@ public class WallWalkerAI : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
-        timer -= Time.deltaTime; // subtract time since last frame
-        if (timer > 0f) { // if countdown not done, skip
-            return;
-        }
-        timer = 0.5f; // if we get here, reset timer
-        Move(); // and move
+        print("WallWalker Update");
+
     }
 
     void Move() {
+        print("WallWalker Move");
+
         IndexPaar checkPos = character.pos.GetNeighbour(currentDir);
 
         if (character.board.IsAlive(checkPos.col, checkPos.row)) {

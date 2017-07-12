@@ -7,7 +7,6 @@ public class HuntWalkerAI : MonoBehaviour {
 
     public Character character;
     public Character player;
-    float timer = 0.5f; // timer variable, used as a "countdown" to next move
     int[,] distance;
 
     // Use this for initialization
@@ -17,15 +16,13 @@ public class HuntWalkerAI : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
-        timer -= Time.deltaTime; // subtract time since last frame
-        if (timer > 0f) { // if countdown not done, skip
-            return;
-        }
-        timer = 0.5f; // if we get here, reset timer
-        Move(); // and move
+        print("HuntWalker Update");
+
     }
 
     private void Move() {
+        print("HuntWalker Move");
+
         IndexPaar target = player.pos;
         List<IndexPaar> path = GetPath(target);
         if (path.Count > 0) {
