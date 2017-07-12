@@ -14,8 +14,6 @@ public class HuntWalkerAI : WalkerAI {
     }
 
     protected override void Move() {
-        print("HuntWalker Move");
-
         IndexPaar target = player.pos;
         List<IndexPaar> path = GetPath(target);
         if (path.Count > 0) {

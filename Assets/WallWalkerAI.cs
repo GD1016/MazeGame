@@ -12,8 +12,6 @@ public class WallWalkerAI : WalkerAI {
     }
 
     protected override void Move() {
-        print("WallWalker Move");
-
         IndexPaar checkPos = character.pos.GetNeighbour(currentDir);
 
         if (character.board.IsAlive(checkPos.col, checkPos.row)) {

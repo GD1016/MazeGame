@@ -11,8 +11,6 @@ public class RandWalkerAI : WalkerAI {
     }
 
     protected override void Move() {
-        print("RandWalker Move");
-
         // create array out of enum
         System.Array values = Direction.GetValues(typeof(Direction));
         int randomIndex = Random.Range(0, values.Length); // select random index
