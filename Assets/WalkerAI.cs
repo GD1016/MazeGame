@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WalkerAI : MonoBehaviour {
+public abstract class WalkerAI : MonoBehaviour {
 
     public Character character;
 
@@ -15,9 +15,6 @@ public class WalkerAI : MonoBehaviour {
 
     // Update is called once per frame
     public void Update() {
-        print("WalkerAI Update");
-        
-
         timer -= Time.deltaTime; // subtract time since last frame
         if (timer > 0f) { // if countdown not done, skip
             return;
@@ -26,7 +23,5 @@ public class WalkerAI : MonoBehaviour {
         Move(); // and move
     }
 
-    protected virtual void Move() {
-        print("Empty Move");
-    }
+    protected abstract void Move();
 }
