@@ -3,9 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HuntWalkerAI : MonoBehaviour {
+public class HuntWalkerAI : WalkerAI {
 
-    public Character character;
     public Character player;
     int[,] distance;
 
@@ -14,13 +13,7 @@ public class HuntWalkerAI : MonoBehaviour {
 
     }
 
-    // Update is called once per frame
-    void Update() {
-        print("HuntWalker Update");
-
-    }
-
-    private void Move() {
+    protected override void Move() {
         print("HuntWalker Move");
 
         IndexPaar target = player.pos;
@@ -44,7 +37,7 @@ public class HuntWalkerAI : MonoBehaviour {
         }
         distance[source.col, source.row] = 0;
 
-        while(queue.Count > 0) {
+        while (queue.Count > 0) {
             IndexPaar u = queue.Dequeue();
             List<IndexPaar> neighbours = character.board.GetWalkableNeighbours(u);
             foreach (IndexPaar neighbour in neighbours) {
@@ -59,12 +52,12 @@ public class HuntWalkerAI : MonoBehaviour {
         Breitensuche(character.pos);
         List<IndexPaar> path = new List<IndexPaar>();
 
-        if(distance[target.col, target.row] < int.MaxValue) {
+        if (distance[target.col, target.row] < int.MaxValue) {
             IndexPaar node = target;
             while (distance[node.col, node.row] != 0) {
                 path.Add(node);
                 List<IndexPaar> neighbours = character.board.GetWalkableNeighbours(node);
-                foreach(IndexPaar neighbour in neighbours) {
+                foreach (IndexPaar neighbour in neighbours) {
                     if (distance[neighbour.col, neighbour.row] == distance[node.col, node.row] - 1) {
                         node = neighbour;
                         break;

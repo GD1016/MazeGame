@@ -2,9 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WallWalkerAI : MonoBehaviour {
+public class WallWalkerAI : WalkerAI {
 
-    public Character character;
     Direction currentDir = Direction.left;
 
     // Use this for initialization
@@ -12,13 +11,7 @@ public class WallWalkerAI : MonoBehaviour {
 
     }
 
-    // Update is called once per frame
-    void Update() {
-        print("WallWalker Update");
-
-    }
-
-    void Move() {
+    protected override void Move() {
         print("WallWalker Move");
 
         IndexPaar checkPos = character.pos.GetNeighbour(currentDir);

@@ -2,22 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RandWalkerAI : MonoBehaviour {
+public class RandWalkerAI : WalkerAI {
 
-    public Character character;
 
     // Use this for initialization
     void Start() {
 
     }
 
-    // Update is called once per frame
-    void Update() {
-        print("RandWalker Update");
-
-    }
-
-    void Move() {
+    protected override void Move() {
         print("RandWalker Move");
 
         // create array out of enum

@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class WalkerAI : MonoBehaviour {
 
+    public Character character;
+
     float timer = 0.5f; // timer variable, used as a "countdown" to next move
 
     // Use this for initialization
@@ -12,8 +14,9 @@ public class WalkerAI : MonoBehaviour {
 	}
 
     // Update is called once per frame
-    void Update() {
+    public void Update() {
         print("WalkerAI Update");
+        
 
         timer -= Time.deltaTime; // subtract time since last frame
         if (timer > 0f) { // if countdown not done, skip
@@ -23,7 +26,7 @@ public class WalkerAI : MonoBehaviour {
         Move(); // and move
     }
 
-    void Move() {
+    protected virtual void Move() {
         print("Empty Move");
     }
 }
